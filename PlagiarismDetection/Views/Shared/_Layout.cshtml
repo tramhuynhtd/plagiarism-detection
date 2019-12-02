@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/public/imgs/favicon.jpg">
+    <title>@ViewBag.Title - Plagiarism Detection</title>
+    @Styles.Render("~/public/css/pd")
+    @RenderSection("css", required: false)
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            @Html.Partial("~/Views/Partial/_LeftMenu.cshtml")
+            @Html.Partial("~/Views/Partial/_TopMenu.cshtml")
+            <!-- page content -->
+            <div class="right_col" role="main">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="custom-footer">
+                    Hệ thống phát hiện sao chép mã nguồn
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    @Scripts.Render("~/public/js/pd")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

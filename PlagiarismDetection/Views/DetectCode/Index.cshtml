@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@section css{
+    @Styles.Render("~/public/css/danh-sach-mon-hoc")
+}*@
+@section scripts{
+    <script src="~/public/assets/pagination/js/pagination.js"></script>
+    @Scripts.Render("~/public/js/danh-sach-mon-hoc")
+}
+
+<div class="row">
+    <!-- start of weather widget -->
+    <div class="col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>So sánh các mã nguồn</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content" id="detect-code">
+                <form class="form-horizontal input_mask" id="form-source-code" action="" accept-charset="UTF-8" method="get">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" id="btn-base-file" tabindex="2">Choose base file</button>
+                                @*<label for="base-file">abc</label>*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-5">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" id="btn-source-file" tabindex="2">Choose source file</button>
+                                @*<label for="source-file">eds</label>*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-2">
+                            <button type="button" class="btn btn-primary" id="btn-compare" link-submit="#" tabindex="2">Compare</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Kết quả</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link" tabindex="4"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content" id="div-table-mon-hoc">
+            </div>
+        </div>
+    </div>
+</div>
+
