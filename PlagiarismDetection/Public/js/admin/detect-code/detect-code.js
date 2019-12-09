@@ -19,7 +19,7 @@ var danhSachMonHocModule = (function () {
                 ShowSourceFile();
             });
             $('#btn-compare-file').on('click', function () {
-                ShowSourceFile();
+                CompareFile();
             });
             //$(document).on('change', '#page-size', function () {
             //    $('#PageSize').val($(this).val());
@@ -43,6 +43,24 @@ var danhSachMonHocModule = (function () {
                         }
                         $('#source-file').append(res.SourceFile[res.SourceFile.length-1]);
                     }
+                }
+            });
+        }
+        catch (e) {
+            console.log('ShowSourceFile: ' + e.message);
+        }
+    }
+    var ShowSourceFile = function () {
+        try {
+            $.ajax({
+                type: 'GET',
+                url: $('#btn-compare-file').attr("link"),
+                data: {
+                    ListBaseFile: $('#base-file').html.toString(),
+                    ListSourceFile: $('#source-file').html.toString(),
+                },
+                success: function (res) {
+                    
                 }
             });
         }
