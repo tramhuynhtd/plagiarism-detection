@@ -148,6 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DetectModel.cs" />
     <Compile Include="Models\MossRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2098,6 +2099,7 @@
     <Content Include="Views\Partial\_LeftMenu.cshtml" />
     <Content Include="Views\Partial\_TopMenu.cshtml" />
     <Content Include="Views\DetectCode\Index.cshtml" />
+    <Content Include="Views\Partial\_Result.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

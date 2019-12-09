@@ -24,6 +24,24 @@ namespace PlagiarismDetection
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "DetectCode", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "ShowSourceFile",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "DetectCode", action = "ShowSourceFile", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "CompareFile",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "DetectCode", action = "CompareFile", id = UrlParameter.Optional }
+            );
+
+            //routes.MapRoute(
+            //    name: "DetectCode",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "DetectCode", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }
