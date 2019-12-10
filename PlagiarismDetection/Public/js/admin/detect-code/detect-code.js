@@ -21,6 +21,15 @@ var danhSachMonHocModule = (function () {
             $('#btn-compare-file').on('click', function () {
                 CompareFile();
             });
+
+            //$('#show-detail').on('click', function () {
+            //    alert("aakbhasd");
+            //    return false;
+            //});
+
+            $(document).on('click', '#show-detail', function () {
+                ShowDetail();
+            });
             //$(document).on('change', '#page-size', function () {
             //    $('#PageSize').val($(this).val());
             //    Search();
@@ -50,14 +59,32 @@ var danhSachMonHocModule = (function () {
             console.log('ShowSourceFile: ' + e.message);
         }
     }
-    var ShowSourceFile = function () {
+    var CompareFile = function () {
         try {
             $.ajax({
                 type: 'GET',
                 url: $('#btn-compare-file').attr("link"),
                 data: {
-                    ListBaseFile: $('#base-file').html.toString(),
-                    ListSourceFile: $('#source-file').html.toString(),
+                    ListBaseFile: $('#base-file').html().toString(),
+                    ListSourceFile: $('#source-file').html().toString(),
+                },
+                success: function (res) {
+                    $('#div-result').html(res);
+                }
+            });
+        }
+        catch (e) {
+            console.log('CompareFile: ' + e.message);
+        }
+    }
+
+    var ShowDetail = function () {
+        try {
+            $.ajax({
+                type: 'GET',
+                url: $('#show-detail').attr("herf"),
+                data: {
+                    LinkDetail: $('#show-detail').attr("link-detail")
                 },
                 success: function (res) {
                     
@@ -65,7 +92,7 @@ var danhSachMonHocModule = (function () {
             });
         }
         catch (e) {
-            console.log('ShowSourceFile: ' + e.message);
+            console.log('CompareFile: ' + e.message);
         }
     }
     //var InitPage = function () {

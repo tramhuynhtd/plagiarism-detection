@@ -8,12 +8,6 @@
         @Styles.Render("~/public/css/danh-sach-mon-hoc")
     }*@
 @section scripts{
-    <script>
-        var url = {
-            showSourceFile: '@Url.RouteUrl("ShowSourceFile")',
-
-        }
-    </script>
     <script src="~/public/assets/pagination/js/pagination.js"></script>
     <script src="~/public/js/admin/detect-code/detect-code.js"></script>
 }
@@ -75,8 +69,9 @@
                 </ul>
                 <div class="clearfix"></div>
             </div>
-            <div class="x_content" id="list-base-file">
-                <p></p>
+            <div class="x_content">
+                <p id="base-file">
+                </p>
             </div>
         </div>
     </div>
@@ -111,7 +106,7 @@
             </div>
         </div>*@
     <div class="col-xs-12 col-sm-4">
-        <button type="button" class="btn btn-primary" id="btn-compare-file" link="/DetectCode/Compare" tabindex="5">Compare</button>
+        <button type="button" class="btn btn-primary" id="btn-compare-file" link="/DetectCode/CompareFile" tabindex="5">Compare</button>
     </div>
 </div>
 <!-- start of result widget -->

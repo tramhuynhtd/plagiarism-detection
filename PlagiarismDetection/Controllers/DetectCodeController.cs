@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlagiarismDetection.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,31 +20,28 @@ namespace PlagiarismDetection.Controllers
         public JsonResult ShowSourceFile()
         {
             List<string> sourceFile = new List<string>();
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\11.931.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\11.958.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\13.938.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\27.900.cpp");
             sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main01.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main02.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main03.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main04.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main05.cpp");
             sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main10.cpp");
             return Json(new { Code = 200, SourceFile = sourceFile}, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult CompareFile(string ListBaseFile, string ListSourceFile)
+        public ActionResult CompareFile(string ListBaseFile, string ListSourceFile)
         {
-            List<string> sourceFile = new List<string>();
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\11.931.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\11.958.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\13.938.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\27.900.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main01.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main10.cpp");
-            return Json(new { Code = 200, SourceFile = sourceFile }, JsonRequestBehavior.AllowGet);
+            //DetectModel detectModel = new DetectModel();
+            //var result = detectModel.Compare(ListBaseFile, ListSourceFile);
+            //return Json(new { Code = 200, Result = result }, JsonRequestBehavior.AllowGet);
+            var result = new DetectModel().Compare("http://moss.stanford.edu/results/533043163");
+            return View("Partial/_Result", result);
         }
 
-        public ActionResult ShowResult()
+        public ActionResult CompareDetail(string LinkDetail)
         {
-            
-            return View("Partial/_Result");
+            ViewBag.Link = LinkDetail;
+            return View();
         }
     }
 }

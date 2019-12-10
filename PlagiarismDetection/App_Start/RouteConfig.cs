@@ -37,6 +37,12 @@ namespace PlagiarismDetection
                 defaults: new { controller = "DetectCode", action = "CompareFile", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "CompareDetail",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "DetectCode", action = "CompareDetail", id = UrlParameter.Optional }
+            );
+
             //routes.MapRoute(
             //    name: "DetectCode",
             //    url: "{controller}/{action}/{id}",

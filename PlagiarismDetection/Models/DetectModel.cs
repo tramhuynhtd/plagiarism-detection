@@ -1,5 +1,7 @@
-﻿using System;
+﻿using PlagiarismDetection.Models.Schema;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -7,10 +9,10 @@ namespace PlagiarismDetection.Models
 {
     public class DetectModel
     {
-        public string Compare(string baseFileInput, string sourceFileInput)
+        public string SendFile(string baseFileInput, string sourceFileInput)
         {
-            List<string> BaseFileList = baseFileInput.Split('\n').ToList();
-            List<string> SourceFileList = sourceFileInput.Split('\n').ToList();
+            List<string> BaseFileList = baseFileInput.Split('\n').ToList().Where(ext => GetRestrictedFileTypes().Contains(Path.GetExtension(ext))).ToList();
+            List<string> SourceFileList = sourceFileInput.Split('\n').ToList().Where(ext => GetRestrictedFileTypes().Contains(Path.GetExtension(ext))).ToList(); ;
 
             var request = new MossRequest
             {
@@ -36,5 +38,19 @@ namespace PlagiarismDetection.Models
                 return null;
             }
         }
+
+        private List<string> GetRestrictedFileTypes()
+        {
+            var files = ".cpp";
+            return files.Length > 0 ? files.Split(',').ToList() : new List<string>();
+        }
+
+        public ListResult Compare(string result)
+        {
+            return new ListResult {
+                Compares = new CrawResult().StartCrawTable(result)
+            };
+        }
+
     }
 }
