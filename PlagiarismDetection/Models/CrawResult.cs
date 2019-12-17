@@ -36,8 +36,12 @@ namespace PlagiarismDetection.Models
             return results;
         }
 
-        public void StartCrawDetail(string url)
+        public Compare StartCrawDetail(string url)
         {
+            if (String.IsNullOrEmpty(url))
+            {
+                return new Compare();
+            }
             var httpClient = new HttpClient();
             var html = httpClient.GetStringAsync(url).Result;
             var htmlDocument = new HtmlDocument();
@@ -46,14 +50,21 @@ namespace PlagiarismDetection.Models
             html = httpClient.GetStringAsync(subUrl).Result;
             htmlDocument.LoadHtml(html);
             var trs = htmlDocument.DocumentNode.Descendants("tr").ToList();
-            var ths = trs.Where(node => node.FirstChild.Name.Equals("th")).ToList();
+            var ths = trs.Where(node => node.FirstChild.Name.Equals("th")).FirstOrDefault().Descendants("th").ToList();
             var result = new Compare
             {
                 Source1 = InformationOfResult(ths[0].InnerText),
-                Source2 = InformationOfResult(ths[3].InnerText),
+                Source2 = InformationOfResult(ths[2].InnerText),
             };
+            trs = trs.Where(node => node.FirstChild.Name.Equals("td")).ToList();
+            foreach (var tr in trs)
+            {
+                var tds = tr.Descendants("td").ToList().Where((c, index) => index % 2 == 0).ToList();
+                result.Source1.Lines.Add(GetLine(tds[0].Descendants("a").FirstOrDefault().InnerText));
+                result.Source2.Lines.Add(GetLine(tds[1].Descendants("a").FirstOrDefault().InnerText));
+            }
             Console.Write("a");
-
+            return result;
         }
 
         private SourceInfo InformationOfResult(string file)
@@ -61,7 +72,8 @@ namespace PlagiarismDetection.Models
             return new SourceInfo
             {
                 NameInfo = GetName(file),
-                Percent = GetPercent(file)
+                Percent = GetPercent(file),
+                Lines = new List<Line>(),
             };
         }
 
@@ -73,6 +85,13 @@ namespace PlagiarismDetection.Models
         private string GetPercent(string file)
         {
             return file.Substring(file.IndexOf(" (") + 2, file.IndexOf(")") - file.IndexOf(" (") - 2);
+        }
+
+        private Line GetLine(string line)
+        {
+            var start = Convert.ToInt32(line.Substring(0, line.IndexOf("-")));
+            var end = Convert.ToInt32(line.Substring(line.IndexOf("-") + 1, line.Length - line.IndexOf("-")-1));
+            return new Line(start, end);
         }
     }
 }

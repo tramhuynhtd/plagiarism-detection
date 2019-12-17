@@ -7,10 +7,14 @@ namespace PlagiarismDetection.Models.Schema
 {
     public class Line
     {
-        public int startLine { get; set; }
+        public Line(int startLine, int endLine)
+        {
+            StartLine = startLine;
+            EndLine = endLine;
+        }
+
+        public int StartLine { get; set; }
 
         public int EndLine { get; set; }
-
-        public string Color { get; set; }
     }
 }

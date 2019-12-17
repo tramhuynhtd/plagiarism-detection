@@ -20,12 +20,18 @@ namespace PlagiarismDetection.Controllers
         public JsonResult ShowSourceFile()
         {
             List<string> sourceFile = new List<string>();
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main01.cpp");
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main02.cpp");
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main03.cpp");
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main04.cpp");
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main05.cpp");
-            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main10.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main01.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main02.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main03.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main04.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main05.cpp");
+            //sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main10.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main01.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main02.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main03.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main04.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main05.cpp");
+            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main10.cpp");
             return Json(new { Code = 200, SourceFile = sourceFile}, JsonRequestBehavior.AllowGet);
         }
 
@@ -38,7 +44,7 @@ namespace PlagiarismDetection.Controllers
 
         public ActionResult CompareDetail(string linkDetail)
         {
-            ViewBag.Link = linkDetail;
+            new CrawResult().StartCrawDetail(linkDetail);
             return View();
         }
     }

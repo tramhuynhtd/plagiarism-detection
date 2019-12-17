@@ -23,7 +23,7 @@ var danhSachMonHocModule = (function () {
             });
 
             $(document).on('click', '.show-detail', function () {
-                ShowDetail($(this).attr('href'), $(this).attr('link-detail').toString());
+                ShowDetail($(this).attr('href'), $(this).attr('link-detail'));
             });
         }
         catch (e) {
@@ -75,7 +75,7 @@ var danhSachMonHocModule = (function () {
                 type: 'GET',
                 url: url,
                 data: {
-                    LinkDetail: link
+                    LinkDetail: link.toString(),
                 },
                 success: function (res) {
                     
