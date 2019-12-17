@@ -22,18 +22,9 @@ var danhSachMonHocModule = (function () {
                 CompareFile();
             });
 
-            //$('#show-detail').on('click', function () {
-            //    alert("aakbhasd");
-            //    return false;
-            //});
-
-            $(document).on('click', '#show-detail', function () {
-                ShowDetail();
+            $(document).on('click', '.show-detail', function () {
+                ShowDetail($(this).attr('href'), $(this).attr('link-detail').toString());
             });
-            //$(document).on('change', '#page-size', function () {
-            //    $('#PageSize').val($(this).val());
-            //    Search();
-            //});
         }
         catch (e) {
             console.log('Init: ' + e.message);
@@ -78,13 +69,13 @@ var danhSachMonHocModule = (function () {
         }
     }
 
-    var ShowDetail = function () {
+    var ShowDetail = function (url, link) {
         try {
             $.ajax({
                 type: 'GET',
-                url: $('#show-detail').attr("herf"),
+                url: url,
                 data: {
-                    LinkDetail: $('#show-detail').attr("link-detail")
+                    LinkDetail: link
                 },
                 success: function (res) {
                     

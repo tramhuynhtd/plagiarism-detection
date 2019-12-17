@@ -1,9 +1,9 @@
-﻿@model ListResult
+﻿@model IEnumerable<Compare>
 @{
-    ListResult result = new ListResult();
+    List<Compare> result = new List<Compare>();
     if (Model != null)
     {
-        result = Model;
+        result = Model.ToList();
     }
 }
 @using PlagiarismDetection.Models.Schema;
@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Compare compare in result.Compares)
+                @foreach (Compare compare in result)
                 {
                     <tr>
                         <td class="">
@@ -36,7 +36,7 @@
                             </div>
                         </td>
                         <td class="text-center middle max-50">
-                            <a id="show-detail" href="/DetectCode/CompareDetail" link-detail ="@compare.Link">
+                            <a class="show-detail" href="/DetectCode/CompareDetail" link-detail ="@compare.Link">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </td>

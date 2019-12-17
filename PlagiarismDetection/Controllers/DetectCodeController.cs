@@ -20,27 +20,25 @@ namespace PlagiarismDetection.Controllers
         public JsonResult ShowSourceFile()
         {
             List<string> sourceFile = new List<string>();
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main01.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main02.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main03.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main04.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main05.cpp");
-            sourceFile.Add("C:\\Users\\tram.huynh\\Downloads\\Example\\main10.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main01.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main02.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main03.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main04.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main05.cpp");
+            sourceFile.Add("C:\\Users\\Admin\\Downloads\\Example\\main10.cpp");
             return Json(new { Code = 200, SourceFile = sourceFile}, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult CompareFile(string ListBaseFile, string ListSourceFile)
+        public ActionResult CompareFile(string baseFile, string listSourceFile)
         {
-            //DetectModel detectModel = new DetectModel();
-            //var result = detectModel.Compare(ListBaseFile, ListSourceFile);
-            //return Json(new { Code = 200, Result = result }, JsonRequestBehavior.AllowGet);
-            var result = new DetectModel().Compare("http://moss.stanford.edu/results/533043163");
+            baseFile = "C:\\Users\\Admin\\Downloads\\Example\\main02.cpp";
+            var result = new DetectModel().Compare(baseFile, listSourceFile);
             return View("Partial/_Result", result);
         }
 
-        public ActionResult CompareDetail(string LinkDetail)
+        public ActionResult CompareDetail(string linkDetail)
         {
-            ViewBag.Link = LinkDetail;
+            ViewBag.Link = linkDetail;
             return View();
         }
     }

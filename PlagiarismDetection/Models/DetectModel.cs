@@ -9,11 +9,9 @@ namespace PlagiarismDetection.Models
 {
     public class DetectModel
     {
-        public string SendFile(string baseFileInput, string sourceFileInput)
+        public List<Compare> Compare(string baseFileInput, string sourceFileInput)
         {
-            List<string> BaseFileList = baseFileInput.Split('\n').ToList().Where(ext => GetRestrictedFileTypes().Contains(Path.GetExtension(ext))).ToList();
-            List<string> SourceFileList = sourceFileInput.Split('\n').ToList().Where(ext => GetRestrictedFileTypes().Contains(Path.GetExtension(ext))).ToList(); ;
-
+            List<string> SourceFileList = sourceFileInput.Split('\n').ToList().Where(ext => GetRestrictedFileTypes().Contains(Path.GetExtension(ext))).ToList();
             var request = new MossRequest
             {
                 UserId = 1,
@@ -25,17 +23,17 @@ namespace PlagiarismDetection.Models
                 MaxMatches = 10
             };
 
-            request.BaseFile.AddRange(BaseFileList);
             request.Files.AddRange(SourceFileList);
+            if (SourceFileList.Count <= 0)
+                return new List<Compare>();
 
             if (request.SendRequest(out var response))
             {
-                var result = response;
-                return result;
+                return ShowResult(response, baseFileInput);
             }
             else
             {
-                return null;
+                return new List<Compare>();
             }
         }
 
@@ -45,11 +43,12 @@ namespace PlagiarismDetection.Models
             return files.Length > 0 ? files.Split(',').ToList() : new List<string>();
         }
 
-        public ListResult Compare(string result)
+        public List<Compare> ShowResult(string result, string baseFile)
         {
-            return new ListResult {
-                Compares = new CrawResult().StartCrawTable(result)
-            };
+            var resultAllFile = new CrawResult().StartCrawTable(result);
+
+            return resultAllFile.Select(p => p).Where(p => baseFile.Contains(p.Source1.NameInfo) || baseFile.Contains(p.Source2.NameInfo)).ToList();
+            //return new CrawResult().StartCrawTable(result);
         }
 
     }
